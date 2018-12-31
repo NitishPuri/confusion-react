@@ -1,57 +1,65 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class DishDetail extends Component {
-  renderDish(dish) {
-    if (dish != null) {
-      return (
-        <div className="row">
-          <div className="col-12 col-md-5 m-1">
-            <Card>
-              <CardImg width="100%" src={dish.image} alt={dish.name} />
-              <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-              </CardBody>
-            </Card>
-          </div>
-          <div className="col-12 col-md-5 m-1">
-            {this.renderComments(dish.comments)}
-          </div>
-        </div>
-      );
-    } else {
-      return (<div></div>);
-    }
+function RenderDish({ dish }) {
+  if (dish != null) {
+    return (
+      <div className="col-12 col-md-5 m-1">
+        <Card>
+          <CardImg width="100%" src={dish.image} alt={dish.name} />
+          <CardBody>
+            <CardTitle>{dish.name}</CardTitle>
+            <CardText>{dish.description}</CardText>
+          </CardBody>
+        </Card>
+      </div>
+    );
+  } else {
+    return (<div></div>);
   }
-  renderComments(comments) {
-    if (comments != null) {
-      const commentList = comments.map((comment) => {
-        return (
-          <li key={comment.id}>
-            {comment.comment}
-            <br />
-            -- {comment.author} , {new Date(comment.date).toDateString()}
-          </li>
-        )
-      });
+}
+
+function RenderComments({ comments }) {
+  if (comments != null) {
+    const commentList = comments.map((comment) => {
       return (
+        <li key={comment.id}>
+          {comment.comment}
+          <br />
+          -- {comment.author} , {new Date(comment.date).toDateString()}
+        </li>
+      )
+    });
+    return (
+      <div className="col-12 col-md-5 m-1">
         <div id="comments">
           <h4>Comments</h4>
           <ul className="list-unstyled">
             {commentList}
           </ul>
         </div>
-      );
-    } else {
-      return (<div></div>);
-    }
-
+      </div>
+    );
+  } else {
+    return (<div></div>);
   }
-  render() {
+}
+
+const DishDetail = (props) => {
+  if (props.dish != null) {
     return (
       <div className="container">
-        {this.renderDish(this.props.dish)}
+        <div className="row">
+          <RenderDish dish={props.dish} />
+          <RenderComments comments={props.dish.comments} />
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <div className="row">
+        </div>
       </div>
     );
   }
