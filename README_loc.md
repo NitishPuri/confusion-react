@@ -10,3 +10,9 @@
 * https://redux.js.org/basics/usage-with-react
 * https://levelup.gitconnected.com/react-component-patterns-ab1f09be2c82
 * https://javascriptplayground.com/functional-stateless-components-react/
+
+### React and Redux
+* https://redux.js.org/basics/usage-with-react
+* https://facebook.github.io/flux/
+* https://github.com/markerikson/react-redux-links/blob/master/redux-tutorials.md
+* 
